@@ -19,9 +19,9 @@ void calibrate(HX711 *amp, Stream *Serial) {
   }
   Serial->println("Determining offset now.");
   amp->tare(50);  // take 50 measurements and average them
-  uint32_t offset = amp->get_offset();
+  uint32_t amp_offset = amp->get_offset();
   Serial->println();
-  Serial->println(offset);
+  Serial->println(amp_offset);
   Serial->println();
 
   Serial->println("Place weight on scale. Getting weight in:");
@@ -31,6 +31,16 @@ void calibrate(HX711 *amp, Stream *Serial) {
   Serial->print("Determining weight now. Assumes ");
   Serial->print(calibration_weight);
   Serial->print("g.");
+
+  amp->calibrate_scale(calibration_weight, 20); // 20 samples
+  float amp_scale = amp->get_scale();
+
+  Serial->println();
+  Serial->print("const uint32_t cell_offset = ");
+  Serial->print(amp_offset);
+  Serial->print(";\nconst uint32_t cell_scale = ");
+  Serial->print(amp_scale);
+  Serial->println(";");
 }
 
 void setup() {
