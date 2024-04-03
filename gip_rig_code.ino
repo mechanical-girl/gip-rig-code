@@ -60,9 +60,15 @@ void setup() {
     calibrate(&amp, &Serial);
   }
 
+  servo.attach(servo_pwm);
   servo.write(0);
+  Serial.println("Degrees,Amp");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  for (int i = 0; i <=30; i++) {
+    Serial.print(i);
+    Serial.print(",");
+    Serial.println(amp.get_units(10));
+  }
 }
