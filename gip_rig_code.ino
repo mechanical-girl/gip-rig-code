@@ -58,6 +58,9 @@ void setup() {
 
   if (cell_offset == 0 || cell_scale == 0) {
     calibrate(&amp, &Serial);
+  } else {
+    amp.set_scale(cell_scale);
+    amp.set_offset(cell_offset);
   }
 
   servo.attach(servo_pwm);
