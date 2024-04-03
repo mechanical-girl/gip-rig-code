@@ -16,6 +16,7 @@ void calibrate(HX711 *amp, Stream *Serial) {
   Serial->println("Set load to zero. Calibrating in:");
   for (int i = 5; i > 0; i--) {
     Serial->println(i);
+    delay(1000);
   }
   Serial->println("Determining offset now.");
   amp->tare(50);  // take 50 measurements and average them
@@ -27,6 +28,7 @@ void calibrate(HX711 *amp, Stream *Serial) {
   Serial->println("Place weight on scale. Getting weight in:");
   for (int i = 5; i > 0; i--) {
     Serial->println(i);
+    delay(1000);
   }
   Serial->print("Determining weight now. Assumes ");
   Serial->print(calibration_weight);
@@ -45,8 +47,9 @@ void calibrate(HX711 *amp, Stream *Serial) {
 
 void setup() {
   // Initialise serial, await readability;
-  Serial.begin(115200);
-  while (!Serial.available()) {};
+  Serial.begin(57600);
+  delay(1000);
+  Serial.println("Serial connection established, hello world!");
 
   amp.begin(sdaPin, sckPin);
 
