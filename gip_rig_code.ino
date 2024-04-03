@@ -7,8 +7,8 @@ HX711 amp;
 const int sdaPin = 3;
 const int sckPin = 2;
 
-const uint32_t cell_offset = 0;
-const uint32_t cell_scale = 0;
+const uint32_t cell_offset = 5074;
+const float cell_scale = 0.13;
 const int calibration_weight = 60;  //in grams
 
 void calibrate(HX711 *amp, Stream *Serial) {
