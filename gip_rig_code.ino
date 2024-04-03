@@ -7,6 +7,9 @@ HX711 amp;
 const int sdaPin = 3;
 const int sckPin = 2;
 
+Servo servo;
+const int servo_pwm = 9;
+
 const uint32_t cell_offset = 5074;
 const float cell_scale = 0.13;
 const int calibration_weight = 60;  //in grams
@@ -56,6 +59,8 @@ void setup() {
   if (cell_offset == 0 || cell_scale == 0) {
     calibrate(&amp, &Serial);
   }
+
+  servo.write(0);
 }
 
 void loop() {
