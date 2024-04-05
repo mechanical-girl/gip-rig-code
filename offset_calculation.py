@@ -20,12 +20,13 @@ for line in filelines:
 col_names = ["angle", "deflection", "measure 1", "measure 2", "measure 3", "mean", "stddev"]
 processed_data=[]
 for key in input_data.keys():
+    angle = int(key)
     this_dataset = {}
-    this_dataset[col_names[0]] = int(angle)
+    this_dataset[col_names[0]] = angle
 
-    this_dataset[col_names[1]] = float(28*sin(30+angle))-base_deflection_offset) # Calculate the deflection at this angle
+    this_dataset[col_names[1]] = float(28*sin(30+angle))-base_deflection_offset # Calculate the deflection at this angle
 
-    this_dataset[col_names[2]],this_dataset[col_names[3]],this_dataset["measure 3"] = *input_data[key]
+    this_dataset[col_names[2]],this_dataset[col_names[3]],this_dataset["measure 3"] = input_data[key]
 
     this_dataset["mean"] = sum(input_data[key])/3
     this_dataset["stddev"] = statistics.stdev(input_data[key])
@@ -34,5 +35,6 @@ for key in input_data.keys():
 
 with open("data.csv", 'w', newline='') as outputfile:
     writer = csv.DictWriter(outputfile, fieldnames=col_names)
+    writer.writeheader()
     for dataset in processed_data:
-        writer.writerow(dataset
+        writer.writerow(dataset)
